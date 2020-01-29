@@ -21,12 +21,15 @@ export default {
         posts: []
     },
     getters: {
+        validPosts(state) {
+            return state.posts.filter(p => { return p.title && p.body })
+        },
         allPosts(state) {
             return state.posts
             
         },
-        postsCount(state) {
-            return state.posts.length
+        postsCount(state, getters) {
+            return getters.validPosts.length
         }
     },
 }

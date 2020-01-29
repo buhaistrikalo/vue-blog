@@ -4,7 +4,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>Posts count: {{postsCount}}</h1>
     <PostForm/>
-    <div class="post" v-for='post in allPosts' :key='post.id'>
+    <div class="post" v-for='post in validPosts' :key='post.id'>
       <h2 class="">{{post.title}}</h2>
       <p>
         {{post.body}}
@@ -19,7 +19,7 @@ import {mapGetters, mapActions} from 'vuex'
 import PostForm from './components/PostForm'
 export default {
   name: 'app',
-  computed: mapGetters(['allPosts', 'postsCount']),
+  computed: mapGetters(['validPosts', 'postsCount']),
   methods: mapActions(['fetchPosts']),
   async mounted() {
     this.fetchPosts(4);
