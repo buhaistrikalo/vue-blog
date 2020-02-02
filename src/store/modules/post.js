@@ -6,15 +6,19 @@ export default {
             const posts = await res.json()
             
             ctx.commit('updatePosts', posts)
-        }
+        },
+        
     },
     mutations: {
         updatePosts(state, posts) {
             state.posts = posts
-            
         },
         addPost(state, post) {
             state.posts.unshift(post)
+        },
+        deletePost(state, post) {
+            alert(post.post.id)
+            state.posts = state.posts.filter(t => t.id !== post.post.id)
         }
     },
     state: {
@@ -26,7 +30,6 @@ export default {
         },
         allPosts(state) {
             return state.posts
-            
         },
         postsCount(state, getters) {
             return getters.validPosts.length

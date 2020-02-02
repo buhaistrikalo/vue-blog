@@ -9,6 +9,7 @@
       <p>
         {{post.body}}
       </p>
+      <button class="delete" v-on:click="removePost(post)">Del</button>
     </div>
   </div>
 </template>
@@ -16,11 +17,21 @@
 <script>
 
 import {mapGetters, mapActions} from 'vuex'
+import {mapMutations} from 'vuex'
 import PostForm from './components/PostForm'
 export default {
   name: 'app',
   computed: mapGetters(['validPosts', 'postsCount']),
-  methods: mapActions(['fetchPosts']),
+  
+  methods: {
+    ...mapMutations(['deletePost']),
+    ...mapActions(['fetchPosts']),
+    removePost(post) {
+      this.deletePost({
+          post: post
+      })
+    }
+  },
   async mounted() {
     this.fetchPosts(4);
   },
@@ -52,5 +63,9 @@ export default {
 }
 img{
   width: 100px;
+}
+.delete{ 
+  display: block;
+  margin-bottom: 10px;
 }
 </style>
