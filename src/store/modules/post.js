@@ -17,7 +17,6 @@ export default {
             state.posts.unshift(post)
         },
         deletePost(state, post) {
-            alert(post.post.id)
             state.posts = state.posts.filter(t => t.id !== post.post.id)
         }
     },
