@@ -66,6 +66,8 @@ export default {
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
+
+        transition: .3s;
     }
     .body button:hover,
     .body button:focus,

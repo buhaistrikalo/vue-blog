@@ -9,7 +9,8 @@
       <p>
         {{post.body}}
       </p>
-      <button class="delete" v-on:click="removePost(post)">Del</button>
+      <button class="button edit">edit</button>
+      <button class="button delete" v-on:click="removePost(post)">Delete</button>
     </div>
   </div>
 </template>
@@ -56,16 +57,32 @@ export default {
   width: 50%;
   margin: 0 auto;
   text-align: left;
-  padding-left: 30px;
-  border: 1px solid grey;
+  padding: 0 30px;
+  border: 1px solid #2c3e50;
   border-radius: 5px;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 img{
   width: 100px;
 }
-.delete{ 
+.button{ 
   display: block;
   margin-bottom: 10px;
+  float: right;
+  border: none;
+  color: white;
+  padding: 5px 10px 5px 10px;
+  background: #2c3e50;
+  
+}
+.delete{
+  margin-right: 2px;
+}
+
+.button:hover,
+.button:focus,
+.button:active{
+    background-color: #41b883;
+    cursor: pointer;
 }
 </style>
