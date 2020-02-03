@@ -18,7 +18,12 @@ export default {
         },
         deletePost(state, post) {
             state.posts = state.posts.filter(t => t.id !== post.post.id)
-        }
+        },
+        editerPost(state, post) {   
+            let newStatePosts = state.posts;
+            newStatePosts[post.post.id].edit = true;
+            state.posts = newStatePosts;
+        },
     },
     state: {
         posts: []

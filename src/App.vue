@@ -5,12 +5,16 @@
     <h1>Posts count: {{postsCount}}</h1>
     <PostForm/>
     <div class="post" v-for='post in validPosts' :key='post.id'>
-      <h2 class="">{{post.title}}</h2>
-      <p>
-        {{post.body}}
-      </p>
-      <button class="button edit">edit</button>
-      <button class="button delete" v-on:click="removePost(post)">Delete</button>
+      <input v-if="post.edit" v-model="post.body"
+      @blur="post.edit=false; $emit('update')"
+      @keyup.enter="post.edit=false; $emit('update')">
+      <div v-else>
+        <label @click="editPost(post)">
+          {{post.body}}
+        </label>
+      </div>
+      <button class="button delete" @click="removePost(post)">Delete</button>
+      <button class="button edit " @click="editPost(post);">Edit</button>
     </div>
   </div>
 </template>
@@ -25,13 +29,19 @@ export default {
   computed: mapGetters(['validPosts', 'postsCount']),
   
   methods: {
-    ...mapMutations(['deletePost']),
+    ...mapMutations(['deletePost', 'editerPost']),
     ...mapActions(['fetchPosts']),
     removePost(post) {
       this.deletePost({
           post: post
       })
-    }
+
+    },
+    editPost(post){
+      this.editerPost({
+        post: post
+      })
+    },
   },
   async mounted() {
     this.fetchPosts(4);
@@ -57,10 +67,13 @@ export default {
   width: 50%;
   margin: 0 auto;
   text-align: left;
-  padding: 0 30px;
+  padding: 30px 30px;
   border: 1px solid #2c3e50;
   border-radius: 5px;
   margin-bottom: 2rem;
+}
+input{
+  border: none;
 }
 img{
   width: 100px;
@@ -75,7 +88,7 @@ img{
   background: #2c3e50;
   
 }
-.delete{
+.edit{
   margin-right: 2px;
 }
 

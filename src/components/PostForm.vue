@@ -1,7 +1,5 @@
 <template>
     <form @submit.prevent="submit">
-        Title: <input type="text" class='title' placeholder="I like Vue and Vuex" v-model='title'>
-        
         <div class="body">
             <textarea type="text" v-model='body'></textarea>
             <button>Create Post</button>
@@ -14,7 +12,6 @@ import {mapMutations} from 'vuex'
 export default {
     data() {
         return {
-            title: '',
             body: ''
         }
     },
@@ -22,11 +19,10 @@ export default {
         ...mapMutations(['addPost']),
         submit() {
             this.addPost({
-                title: this.title,
                 body: this.body,
                 id: Date.now(),
             })
-            this.title = this.body = '';
+            this.body = '';
         }
     }
 }
@@ -46,10 +42,6 @@ export default {
         width: 50%;
         margin: 0 auto;
         margin-bottom: 20px;
-    }
-    .title{
-        min-height: 30px;
-        width: 40%;
     }
     .body textarea {
         width: 100%;
