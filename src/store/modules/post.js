@@ -7,7 +7,9 @@ export default {
             
             ctx.commit('updatePosts', posts)
         },
-        
+        async updatePost(ctx, state) {
+            ctx.commit('updatePosts', state.posts)
+        },
     },
     mutations: {
         updatePosts(state, posts) {
@@ -30,7 +32,7 @@ export default {
     },
     getters: {
         validPosts(state) {
-            return state.posts.filter(p => { return p.title && p.body })
+            return state.posts.filter(p => { return p.body })
         },
         allPosts(state) {
             return state.posts

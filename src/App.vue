@@ -13,8 +13,10 @@
           {{post.body}}
         </label>
       </div>
-      <button class="button delete" @click="removePost(post)">Delete</button>
-      <button class="button edit " @click="editPost(post);">Edit</button>
+      <div class="button__blick">
+        <button class="button edit " @click="editPost(post);">Edit</button>
+        <button class="button delete" @click="removePost(post)">Delete</button>
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +32,7 @@ export default {
   
   methods: {
     ...mapMutations(['deletePost', 'editerPost']),
-    ...mapActions(['fetchPosts']),
+    ...mapActions(['fetchPosts', 'updatePost']),
     removePost(post) {
       this.deletePost({
           post: post
@@ -41,6 +43,7 @@ export default {
       this.editerPost({
         post: post
       })
+      this.updatePost();
     },
   },
   async mounted() {
@@ -68,6 +71,7 @@ export default {
   margin: 0 auto;
   text-align: left;
   padding: 30px 30px;
+  padding-bottom: 10px;
   border: 1px solid #2c3e50;
   border-radius: 5px;
   margin-bottom: 2rem;
@@ -79,9 +83,9 @@ img{
   width: 100px;
 }
 .button{ 
-  display: block;
+  margin-top: 20px;
   margin-bottom: 10px;
-  float: right;
+  
   border: none;
   color: white;
   padding: 5px 10px 5px 10px;
@@ -90,6 +94,10 @@ img{
 }
 .edit{
   margin-right: 2px;
+}
+.button__blick{
+  display: flex;
+  justify-content: flex-end;
 }
 
 .button:hover,
